@@ -7,40 +7,89 @@
 import React from "react";
 import  ReactDOM  from "react-dom";
 
-// const heading = React.createElement(
-//     "div",
-//     { id: "parent" },
-//     //   "Hello World from basic"
-//     React.createElement(
-//       "div",
-//       { id: "child" },[
-//       React.createElement("h1", { id: "h1" }, "Hello from nested"),
-//       React.createElement("h1", { id: "h1" }, "Hello from two"),
-//       ]
-//     )
-//   );
-  
 
-  
-  const Title = ()=>{
-    return<h1>Hello From functional component</h1>
-  }
-  
-  const Title2 =<h1>Hello From functional component</h1>
-  
 
-  const HeadingComponent = ()=>(
-      // {} using this we can write any piece of JSX expression in JSX and to render React element we use {Title2} 
-    <div>
-      <Title/>
-      {Title2} 
-      <h2>Bye Bye</h2>
-      <p>Check</p>
+const Body = ()=>{
+  return (
+    <div className="body">
+
+      <div className="search">Search</div>
+      <div className="res-container"> 
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+      <RestaurantCard/>
+        <RestaurantCard/>
+      
+      </div>
+        
     </div>
   )
+}
+
+const RestaurantCard=()=>{
+
+  return (
+    <div className="res_card">
+        <img className="res_image" src = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/mghci4j6xjg0gk78kd0d"/>
+        <div className="description">
+        <h2>Okhla Corner</h2>
+        <h3>Cuisens : Biryani, Nihari, korma, Bheja, Chole Bhature</h3>
+        <p>Ratings : 4⭐</p>
+        </div>
+    </div>
+  )
+}
+
+
+const Header = ()=>{
+  return (
+    <div className="headContainer">
+      <div className="logo-container">
+        <img  className="logo" src = "https://e0.pxfuel.com/wallpapers/174/289/desktop-wallpaper-printable-customizable-restaurant-logo-templates-food-logo-thumbnail.jpg"/>
+      </div>
+      <div className="nav-items">
+        <ul className="li-items">
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact Us</li>
+          <li className="cart">Cart</li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+
+  const AppLayout = ()=>{
+    return (
+      // <Hello/>
+      <>
+        <Header/>
+        <Body/>
+      </>
+      // <h1>Hello</h1>
+    )
+  }
 
 
   const reactRoot = ReactDOM.createRoot(document.getElementById("root"));
   
   // reactRoot.render(heading);
-  reactRoot.render(<HeadingComponent/>);
+  reactRoot.render(<AppLayout/>);

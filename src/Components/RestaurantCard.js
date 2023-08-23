@@ -1,6 +1,6 @@
 
 const RestaurantCard=(params)=>{
-    console.log(params.resData.info);
+    // console.log(params.resData.info);
     return (
       <div className="res_card">
           <img className="res_image" src = {"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + params.resData.info.cloudinaryImageId}/>

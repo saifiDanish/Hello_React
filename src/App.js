@@ -5,21 +5,14 @@
 // );
 
 import React from "react";
-import  ReactDOM  from "react-dom/client";
-
+import ReactDOM from "react-dom/client";
 import Header from "./Components/Header";
-
 import Body from "./Components/Body";
-
-
-
-
-
-
-
-
-
-
+import Contact from "./Components/Contack";
+import About from "./Components/About";
+import Error from "./Components/Error";
+import RestaurantMenu from "./Components/RestaurantMenu";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 // const resOBJ = {
 //   "info": {
@@ -105,20 +98,62 @@ import Body from "./Components/Body";
 //   }
 // };
 
+const AppLayout = () => {
+  return (
+    // <Hello/>
+    <>
+      <Header />
+      {/* <Body /> */}
+      <Outlet/>
+    </>
+    // <h1>Hello</h1>
+  );
+};
 
-  const AppLayout = ()=>{
-    return (
-      // <Hello/>
-      <>
-        <Header/>
-        <Body/>
-      </>
-      // <h1>Hello</h1>
-    )
-  }
+const appRoter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/Home",
+        element: <Body />,
+      },
+      {
+        path: "/Contact",
+        element: <Contact />,
+      },
+      {
+        path: "/About",
+        element: <About />,
+      },
+      {
+        path:"/restaurant/:resId",
+        element:<RestaurantMenu/>
+      }
+    ],
 
+    errorElement: <Error />,
+  },
 
-  const reactRoot = ReactDOM.createRoot(document.getElementById("root"));
-  
-  // reactRoot.render(heading);
-  reactRoot.render(<AppLayout/>);
+  // Without Childer to make the header intact we are using children and outlet
+  // {
+  //   path: "/Home",
+  //   element: <Home />,
+  // },
+  // {
+  //   path: "/contact",
+  //   element: <Contact />,
+  // },
+  // {
+  //   path: "/About",
+  //   element: <About />,
+  // },
+  // {
+  // }
+]);
+
+const reactRoot = ReactDOM.createRoot(document.getElementById("root"));
+
+// reactRoot.render(heading);
+reactRoot.render(<RouterProvider router={appRoter} />);

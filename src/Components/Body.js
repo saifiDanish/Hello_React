@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import dataOBJ from "../utils/constant";
 import { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [resList, setresList] = useState([]);
@@ -18,16 +19,19 @@ const Body = () => {
     );
 
     const json = await data.json();
+    console.log(json);
     setresList(
-      json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredList(
-      json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants
+      // json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants,
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      );
+      setFilteredList(
+        // json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants,
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     // console.log(json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants);
   };
 
-  if (resList.length === 0) return <Shimmer />;
+  if (resList.length === null) return <Shimmer />;
 
   return (
     <div className="body">
@@ -56,16 +60,10 @@ const Body = () => {
           Filter all top restaurant
         </button>
       </div>
-
-
-
-
-
-
-
       <div className="res-container">
-        {filteredList.map((data) => {
-          return <RestaurantCard resData={data} />;
+        {filteredList.map((data,id) => {
+          console.log(data.info.id);
+          return <Link to={"/restaurant/"+data.info.id}><RestaurantCard key={id} resData={data} /></Link>;
         })}
         ;
       </div>

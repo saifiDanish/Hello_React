@@ -3,6 +3,7 @@ import dataOBJ from "../utils/constant";
 import { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [resList, setresList] = useState([]);
@@ -31,6 +32,11 @@ const Body = () => {
     // console.log(json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants);
   };
 
+  const isOnline = useOnlineStatus();
+
+  if(isOnline===false){
+    return <h1>Opps you are offline, Please check your internet connection</h1>
+  }
   if (resList.length === null) return <Shimmer />;
 
   return (

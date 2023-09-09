@@ -4,7 +4,7 @@
 //   "Hello World from basic"
 // );
 
-import React from "react";
+import React, { lazy ,Suspense} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./Components/Header";
 import Body from "./Components/Body";
@@ -13,6 +13,10 @@ import About from "./Components/About";
 import Error from "./Components/Error";
 import RestaurantMenu from "./Components/RestaurantMenu";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { Shimmer } from "./Components/Shimmer";
+// import IndiaMart from "./Components/IndiaMart";
+
+const IndiaMart = lazy(()=> import("./Components/IndiaMart"));
 
 // const resOBJ = {
 //   "info": {
@@ -126,6 +130,12 @@ const appRoter = createBrowserRouter([
       {
         path: "/About",
         element: <About />,
+      },
+      {
+        path: "/IndiaMart",
+        element: <Suspense fallback={<Shimmer/>}>
+              <IndiaMart />
+            </Suspense>,
       },
       {
         path:"/restaurant/:resId",

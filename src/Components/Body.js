@@ -23,11 +23,13 @@ const Body = () => {
     console.log(json);
     setresList(
       // json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants,
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      // json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
       setFilteredList(
         // json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants,
-        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        // json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     // console.log(json?.data.cards[5]?.card?.card.gridElements?.infoWithStyle?.restaurants);
   };
@@ -37,17 +39,17 @@ const Body = () => {
   if(isOnline===false){
     return <h1>Opps you are offline, Please check your internet connection</h1>
   }
-  if (resList.length === null) return <Shimmer />;
+  if (resList.length === null || resList===null || resList===undefined) return <Shimmer />;
 
   return (
     <div className="body">
 
-      <div className="filter-container">
-        <div className="search">
-          <input type="text" className="search-box" value={query} onChange={(e)=>{
+      <div className="flex m-2">
+        <div className="m-2">
+          <input type="text" className=" border-solid border-2 border-green-300 rounded-md" placeholder="Search" value={query} onChange={(e)=>{
               setQuery(e.target.value);
           }}/>
-          <button className="search-btn" onClick={()=>{
+          <button className="ml-2 px-4 border-solid border-2 bg-purple-200 hover:border-green-300 rounded-lg" onClick={()=>{
             const filterdSearch = resList.filter((res)=>{
               return res.info.name.toLowerCase().includes(query.toLocaleLowerCase());
             })
@@ -62,11 +64,11 @@ const Body = () => {
             });
             setFilteredList(filterData);
           }}
-        className="filter-btn">
+        className="ml-2 px-4 border-solid border-2 bg-purple-200 hover:border-green-300 rounded-lg">
           Filter all top restaurant
         </button>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredList.map((data,id) => {
           console.log(data.info.id);
           return <Link to={"/restaurant/"+data.info.id}><RestaurantCard key={id} resData={data} /></Link>;

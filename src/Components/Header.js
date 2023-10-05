@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useContext, useState } from "react";
+import UserContext from "../utils/UserContext";
 
 const Header = ()=>{
   const isOnline = useOnlineStatus();
+  const [loggedIn,setLoggedIn] = useState("Logout");
+
+  const {loggedInUser} = useContext(UserContext);
+  // console.log(UserName.loggedInUser);
     return (
       <div className="flex justify-between items-center bg-green-100">
         <div className="w-20">
@@ -22,6 +28,10 @@ const Header = ()=>{
             <li className="m-2"><Link to="/About">About</Link></li>
             <li className="m-2"><Link to="/Contact">Contact Us</Link></li>
             <li className="m-2">Cart</li>
+            <li className="m-2 cursor-pointer" onClick={()=>{
+              loggedIn==="Logout"?setLoggedIn("Login"):setLoggedIn("Logout");
+            }}>{loggedIn} - {loggedInUser}</li>
+
           </ul>
         </div>
       </div>

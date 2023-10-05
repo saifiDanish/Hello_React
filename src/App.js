@@ -4,7 +4,7 @@
 //   "Hello World from basic"
 // );
 
-import React, { lazy ,Suspense} from "react";
+import React, { lazy ,Suspense, useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./Components/Header";
 import Body from "./Components/Body";
@@ -14,6 +14,7 @@ import Error from "./Components/Error";
 import RestaurantMenu from "./Components/RestaurantMenu";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { Shimmer } from "./Components/Shimmer";
+import UserContext from "./utils/UserContext";
 // import IndiaMart from "./Components/IndiaMart";
 
 const IndiaMart = lazy(()=> import("./Components/IndiaMart"));
@@ -103,12 +104,24 @@ const IndiaMart = lazy(()=> import("./Components/IndiaMart"));
 // };
 
 const AppLayout = () => {
+
+  const[useName,setUserName]=useState();
+
+  useEffect(()=>{
+    const data={
+      name:"Danish Saifi"
+    } 
+    setUserName(data.name)
+  },[])
   return (
     // <Hello/>
     <>
-      <Header />
-      {/* <Body /> */}
-      <Outlet/>
+    {/* TO update the value of our context we need to pass a function bind with its state */}
+      <UserContext.Provider value={{loggedInUser:useName , setUserName}}>
+        <Header />
+        {/* <Body /> */}
+        <Outlet/>
+      </UserContext.Provider>
     </>
     // <h1>Hello</h1>
   );

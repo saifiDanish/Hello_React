@@ -133,6 +133,10 @@ const appRoter = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
+        path: "/",
+        element: <Body />,
+      },
+      {
         path: "/Home",
         element: <Body />,
       },
